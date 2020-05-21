@@ -10,6 +10,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private final static int MAX_ORDER = 9;
+    private final static String KEY_NAME = "MainActivity.order";
+
     private int order = 1;
 
     private TextView orderView;
@@ -43,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
                 display();
             }
         });
+
+        if (savedInstanceState != null) order = savedInstanceState.getInt(KEY_NAME);
     }
 
     @Override
@@ -62,5 +66,11 @@ public class MainActivity extends AppCompatActivity {
         if (BuildConfig.DEBUG && !f) {
             throw new AssertionError(message);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(KEY_NAME, order);
     }
 }
